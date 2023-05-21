@@ -1,0 +1,38 @@
+public class CalculatorController {
+
+    public integer number1{get;set;}
+    public integer number2{get;set;}
+    public string operator{get;set;}
+    public double result{get;set;}
+    public void calculation()
+    {
+        if(operator.contains('+'))
+        {
+            result=number1+number2;  
+        }
+       
+        else if(operator.contains('-'))
+        {
+            result=number1-number2;
+        }
+        else if(operator.contains('*'))
+        {
+            result=number1*number2;
+        }
+        else if(operator.contains('/'))
+        {
+            if(number2==0)
+            {
+                result=-1;
+			}
+            else
+            	result=(double)number1/number2;
+        }
+        else if(operator.contains('%'))
+        {
+            result=Math.MOD(number1,number2);
+        }
+       
+    }
+
+}

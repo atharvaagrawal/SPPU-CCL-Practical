@@ -1,0 +1,29 @@
+<apex:page controller="StudentController">
+    <apex:form>
+        <h1>Student Management App</h1>
+        <p>Enter student information and click "Add Student" to create a new student record.</p>
+        <label>Name:</label>
+        <apex:inputText value="{!newStudent.LastName}"/><br/><br/>
+        <label>Email:</label>
+        <apex:inputText value="{!newStudent.Email}"/><br/><br/>
+        <apex:commandButton styleClass="btn btn-primary" value="Add Student" action="{!createStudent}"/><br/><br/>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+            <apex:repeat value="{!students}" var="student">
+                <tr>
+                    <td>{!student.LastName}</td>
+                    <td>{!student.Email}</td>
+                    <td>
+                        <apex:commandLink value="Delete" action="{!deleteStudent}" rerender="students">
+                            <apex:param name="studentToDelete" value="{!student.Id}" assignTo="{!studentToDelete}"/>
+                        </apex:commandLink>
+                    </td>
+                </tr>
+            </apex:repeat>
+        </table>
+    </apex:form>
+</apex:page>

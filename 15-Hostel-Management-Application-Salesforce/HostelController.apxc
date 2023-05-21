@@ -1,0 +1,36 @@
+public class HostelController {
+    public List<Contact> students { get; set; }
+    public Contact newStudent { get; set; }
+    public String studentToDelete { get; set; }
+
+    public HostelController() {
+        students = [SELECT Id, LastName, Email, Account.Name FROM Contact WHERE Account.Type = 'Hostel'];
+        newStudent = new Contact(Account = new Account(Type = 'Hostel'));
+    }
+
+    public void addStudent() {
+        Account hostelAccount = new Account(Type = 'Hostel', Name = 'Hostel Account');
+        insert hostelAccount;
+        newStudent.AccountId = hostelAccount.Id;
+        newStudent.Account = null; // Set the Account reference to null
+        insert newStudent;
+        students.add(newStudent);
+        newStudent = new Contact(AccountId = hostelAccount.Id);
+    }
+
+
+
+    public void removeStudent() {
+        Integer indexToRemove = -1;
+        for (Integer i = 0; i < students.size(); i++) {
+            if (students[i].Id == studentToDelete) {
+                indexToRemove = i;
+                break;
+            }
+        }
+        if (indexToRemove >= 0) {
+            delete students[indexToRemove];
+            students.remove(indexToRemove);
+        }
+    }
+}

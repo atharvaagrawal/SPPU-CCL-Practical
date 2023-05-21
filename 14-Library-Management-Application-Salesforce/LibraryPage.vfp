@@ -1,0 +1,29 @@
+<apex:page controller="LibraryController">
+    <apex:form>
+        <h1>Library Management App</h1>
+        <p>Enter book information and click "Add Book" to add a new book record.</p>
+        <label>Title:</label>
+        <apex:inputText value="{!newBook.LastName}"/><br/><br/>
+        <label>Author:</label>
+        <apex:inputText value="{!newBook.Email}"/><br/><br/>
+        <apex:commandButton styleClass="btn btn-primary" value="Add Book" action="{!createBook}"/><br/><br/>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Action</th>
+            </tr>
+            <apex:repeat value="{!books}" var="book">
+                <tr>
+                    <td>{!book.LastName}</td>
+                    <td>{!book.Email}</td>
+                    <td>
+                        <apex:commandLink value="Delete" action="{!deleteBook}" rerender="books">
+                            <apex:param name="bookToDelete" value="{!book.Id}" assignTo="{!bookToDelete}"/>
+                        </apex:commandLink>
+                    </td>
+                </tr>
+            </apex:repeat>
+        </table>
+    </apex:form>
+</apex:page>

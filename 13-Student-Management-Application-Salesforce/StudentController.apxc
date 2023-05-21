@@ -1,0 +1,30 @@
+public class StudentController {
+    public List<Contact> students { get; set; }
+    public Contact newStudent { get; set; }
+    public String studentToDelete { get; set; }
+
+    public StudentController() {
+        students = [SELECT Id, LastName, Email FROM Contact];
+        newStudent = new Contact();
+    }
+
+    public void createStudent() {
+        insert newStudent;
+        students.add(newStudent);
+        newStudent = new Contact();
+    }
+
+    public void deleteStudent() {
+        Integer indexToRemove = -1;
+        for (Integer i = 0; i < students.size(); i++) {
+            if (students[i].Id == studentToDelete) {
+                indexToRemove = i;
+                break;
+            }
+        }
+        if (indexToRemove >= 0) {
+            delete students[indexToRemove];
+            students.remove(indexToRemove);
+        }
+    }
+}

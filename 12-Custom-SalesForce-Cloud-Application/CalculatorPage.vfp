@@ -1,0 +1,18 @@
+<apex:page controller="CalculatorController">
+    <apex:form >
+        <h1>Calculator</h1>
+        <p>Enter two numbers and an operator, then click "Show Result" to calculate.</p>
+        <label>Number 1:</label>
+        <apex:inputText value="{!number1}"/><br/><br/>
+        <label>Number 2:</label>
+        <apex:inputText value="{!number2}"/><br/><br/>
+        <label>Operator:</label>
+        <apex:inputText value="{!operator}"/><br/><br/>
+        <apex:commandButton styleClass="btn btn-primary" value="Show Result" action="{!calculation}">
+            <apex:param name="result" value="{!result}"/>
+        </apex:commandButton>
+        <br/><br/>
+        <apex:outputLabel styleClass="result-label">Result: </apex:outputLabel>
+        <apex:outputText value="{!result}" styleClass="result-value"/>
+    </apex:form>
+</apex:page>

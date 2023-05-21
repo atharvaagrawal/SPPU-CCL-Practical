@@ -1,0 +1,34 @@
+public class LibraryController {
+    public List<Contact> books { get; set; }
+    public Contact newBook { get; set; }
+    public String bookToDelete { get; set; }
+
+    public LibraryController() {
+        books = [SELECT Id, LastName, Email, Account.Name FROM Contact WHERE Account.Type = 'Book'];
+        newBook = new Contact(Account = new Account(Type = 'Book'));
+    }
+
+    public void createBook() {
+        Account bookAccount = new Account(Type = 'Book', Name = 'Library');
+        insert bookAccount;
+        newBook.AccountId = bookAccount.Id;
+        newBook.Account = null;  // Set the Account reference to null
+        insert newBook;
+        books.add(newBook);
+        newBook = new Contact(AccountId = bookAccount.Id);
+    }
+
+    public void deleteBook() {
+        Integer indexToRemove = -1;
+        for (Integer i = 0; i < books.size(); i++) {
+            if (books[i].Id == bookToDelete) {
+                indexToRemove = i;
+                break;
+            }
+        }
+        if (indexToRemove >= 0) {
+            delete books[indexToRemove];
+            books.remove(indexToRemove);
+        }
+    }
+}
