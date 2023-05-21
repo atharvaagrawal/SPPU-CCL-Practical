@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Information</title>
+  </head>
+  <body>
+    <h1>Information</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Seat Number</th>
+          <th>Department</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in res %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.seat_number }}</td>
+          <td>{{ item.department }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
